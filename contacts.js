@@ -2,9 +2,6 @@ const fs = require("node:fs/promises");
 const path = require("node:path");
 const crypto = require("node:crypto");
 
-// contacts.js
-
-// Розкоментуй і запиши значення
 const contactsPath = path.join(__dirname, "db", "contacts.json");
 
 console.log(contactsPath);
@@ -21,7 +18,6 @@ async function writeContacts(contacts) {
 async function listContacts() {
    const data = await readContacts();
   return data;
-  // ...твій код. Повертає масив контактів.
 }
 
 async function getContactById(contactId) {
@@ -29,7 +25,6 @@ async function getContactById(contactId) {
   const contact = contacts.find((contact) => contact.id === contactId);
 
   return contact || null;
-  // ...твій код. Повертає об'єкт контакту з таким id. Повертає null, якщо контакт з таким id не знайдений.
 }
 
 async function removeContact(contactId) {
@@ -46,7 +41,6 @@ async function removeContact(contactId) {
   await writeContacts(contacts);
   return removedContact;
 
-  // ...твій код. Повертає об'єкт видаленого контакту. Повертає null, якщо контакт з таким id не знайдений.
 }
 
 async function addContact(name, email, phone) {
@@ -56,7 +50,6 @@ async function addContact(name, email, phone) {
   await writeContacts(contacts);
   return newContact;
 
-  // ...твій код. Повертає об'єкт доданого контакту (з id).
 }
 
 module.exports = {
