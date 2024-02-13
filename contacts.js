@@ -14,13 +14,13 @@ async function readContacts() {
   return JSON.parse(data);
 }
 
-function writeContacts(contacts) {
-  return fs.writeFile(contactsPath, JSON.stringify(contacts, undefined, 2));
+async function writeContacts(contacts) {
+  return await fs.writeFile(contactsPath, JSON.stringify(contacts, undefined, 2));
 }
 
 async function listContacts() {
-  const contacts = await readContacts();
-  return contacts;
+   const data = await readContacts();
+  return data;
   // ...твій код. Повертає масив контактів.
 }
 
@@ -43,7 +43,7 @@ async function removeContact(contactId) {
 
   contacts.splice(index, 1);
 
-  await writeContacts();
+  await writeContacts(contacts);
   return removedContact;
 
   // ...твій код. Повертає об'єкт видаленого контакту. Повертає null, якщо контакт з таким id не знайдений.
@@ -51,9 +51,9 @@ async function removeContact(contactId) {
 
 async function addContact(name, email, phone) {
   const contacts = await readContacts();
-  const newContact = { name, email, phone, id: crypto.randomUUID() };
+  const newContact = { id: crypto.randomUUID(),name, email, phone };
   contacts.push(newContact);
-  await writeContacts();
+  await writeContacts(contacts);
   return newContact;
 
   // ...твій код. Повертає об'єкт доданого контакту (з id).
